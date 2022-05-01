@@ -21,7 +21,7 @@ jobs:
         pr_label: "bot"
 
   publish:
-    if: github.event_name == 'issues' && github.event.issues.issue.user.login == 'raiden-bot'
+    if: github.event_name == 'issues' && github.event.issue.user.login == 'raiden-bot'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
