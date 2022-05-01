@@ -61,7 +61,7 @@ if (!file.startsWith(videosDir)) {
   process.exit(1)
 }
 
-await writeFile(file, object)
+await writeFile(file, block)
 
 await gitExec(['add', 'videos'])
 await gitExec(['commit', '-m', subject, '-m', text, '-m', `issue #${ISSUE_NUMBER}`])
