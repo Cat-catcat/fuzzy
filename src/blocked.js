@@ -14,7 +14,6 @@ const decryptLine = async string => {
   const lines = await Promise.all(ps)
   const result = lines.filter(Boolean)
   console.log(lines.length)
-  console.log(lines)
   return result
 }
 
