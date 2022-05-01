@@ -2,7 +2,7 @@ import { writeFile } from 'fs/promises'
 import { join } from 'path'
 
 import { GitProcess } from 'dugite'
-import { decrypt } from './crypto.js'
+import { decrypt, encrypt } from './crypto.js'
 
 import { userBlock, deviceBlock, ipBlock } from './blocked.js'
 
@@ -53,7 +53,17 @@ await gitExec(['checkout', branchName])
 
 const subject = 'review'
 
-const text = `w`
+const text = `
+
+${title} <https://www.bilibili.com/video/${id}>
+${channel}
+![](${cover})
+
+ban 设备, 将\`${(await encrypt(deviceId)).toString('base64')}\` 写入 <https://github.com/Cat-catcat/fuzzy/edit/master/blocked/device>
+ban IP, 将\`${(await encrypt(ip)).toString('base64')}\` 写入 <https://github.com/Cat-catcat/fuzzy/edit/master/blocked/ip>
+ban 用户, 将\`${(await encrypt(userId)).toString('base64')}\` 写入 <https://github.com/Cat-catcat/fuzzy/edit/master/blocked/user>
+
+`
 
 const file = join(videosDir, `${id}.json`)
 if (!file.startsWith(videosDir)) {
