@@ -1,0 +1,24 @@
+{
+  "name": "fuzzy",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cat-catcat/fuzzy.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Cat-catcat/fuzzy/issues"
+  },
+  "homepage": "https://github.com/Cat-catcat/fuzzy#readme",
+  "dependencies": {
+    "dugite": "^1.109.0"
+  }
+}
