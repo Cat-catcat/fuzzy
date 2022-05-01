@@ -5,7 +5,7 @@ import { decrypt } from './crypto.js'
 
 const blockedDir = join(process.cwd(), 'blocked')
 
-const decryptLine = string => {
+const decryptLine = async string => {
   const ps = string
     .split('\n')
     .map(line => Buffer.from(line, 'base64').toString())
@@ -17,6 +17,6 @@ const decryptLine = string => {
   return result
 }
 
-export const deviceBlock = decryptLine((await readFile(join(blockedDir, 'device'))).toString())
-export const ipBlock = decryptLine((await readFile(join(blockedDir, 'ip'))).toString())
-export const userBlock = decryptLine((await readFile(join(blockedDir, 'user'))).toString())
+export const deviceBlock = await decryptLine((await readFile(join(blockedDir, 'device'))).toString())
+export const ipBlock = await decryptLine((await readFile(join(blockedDir, 'ip'))).toString())
+export const userBlock = await decryptLine((await readFile(join(blockedDir, 'user'))).toString())
