@@ -1,0 +1,56 @@
+name: create review
+
+on:
+  issues:
+    types: [opened, reopened]
+  push:
+    branches:
+      - 'review-*'
+
+jobs:
+  pr:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Create Pull Request
+      uses: repo-sync/pull-request@v2
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        pr_label: "bot"
+
+  publish:
+    if: github.event_name == 'issues' && github.event.issue.sender.login == 'raiden-bot'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: npm install
+      run: npm install
+
+    - name: Commit Branch
+      run: node src/submitPr.js
+      env:
+        ISSUE_NUMBER: ${{ github.event.issue.number }}
+        ISSUE_BODY: ${{ github.event.issue.body }}
+        PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.RAIDEN_TOKEN }}
+        branch: ${{ format('review-{0}', github.event.issue.number) }}
+        force: true
+
+    - name: Close Issue
+      run: node src/closeIssue.js
+      env:
+        GITHUB_TOKEN: ${{ secrets.RAIDEN_TOKEN }}
+        ISSUE_NUMBER: ${{ github.event.issue.number }}

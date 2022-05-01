@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Cat-catcat/fuzzy/issues"
   },
-  "homepage": "https://github.com/Cat-catcat/fuzzy#readme"
+  "homepage": "https://github.com/Cat-catcat/fuzzy#readme",
+  "dependencies": {
+    "dugite": "^1.109.0"
+  }
 }
