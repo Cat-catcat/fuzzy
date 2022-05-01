@@ -12,11 +12,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
     - name: Use Node.js 18
       uses: actions/setup-node@v3
       with:
         node-version: '18'
-    - name: npm generate
+    - name: merge
       run: |
         npm install
         node src/merge.js
