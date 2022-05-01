@@ -52,7 +52,7 @@ if (deviceBlock.includes(deviceId)) {
 await gitExec(['branch', branchName])
 await gitExec(['checkout', branchName])
 
-const subject = `${twelveFirst.map(pinyinName).join(', ')} | ${twelveSecond.map(pinyinName).join(', ')}`
+const subject = `${twelveFirst.map(pinyinName).join(' ')} | ${twelveSecond.map(pinyinName).join(' ')}`
 
 const text = `
 提交时间 ${new Date(timestamp).toLocaleString('zh-CN')}
@@ -63,7 +63,9 @@ ${channel}
 ![](${cover})
 
 ban 设备, 将\`${(await encrypt(deviceId)).toString('base64')}\` 写入 <https://github.com/Cat-catcat/fuzzy/edit/master/blocked/device>
+
 ban IP, 将\`${(await encrypt(ip)).toString('base64')}\` 写入 <https://github.com/Cat-catcat/fuzzy/edit/master/blocked/ip>
+
 ban 用户, 将\`${(await encrypt(userId)).toString('base64')}\` 写入 <https://github.com/Cat-catcat/fuzzy/edit/master/blocked/user>
 
 `
