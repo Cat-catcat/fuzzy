@@ -12,7 +12,7 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
 
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
@@ -24,7 +24,9 @@ jobs:
     if: github.event_name == 'issues' && github.event.issue.user.login == 'raiden-bot'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
 
     - name: Use Node.js
       uses: actions/setup-node@v3
