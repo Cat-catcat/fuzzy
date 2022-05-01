@@ -31,7 +31,7 @@ const object = JSON.parse(block)
 
 const { enc, video, twelveFirst, twelveSecond, timestamp } = object
 const { cover, channel, title, id } = video
-const { ip, deviceId, userId } = JSON.parse(await decrypt(enc))
+const { ip, deviceId, userId } = JSON.parse(await decrypt(Buffer.from(enc, 'base64')))
 
 if (userBlock.includes(userId)) {
   console.log('User blocked')
