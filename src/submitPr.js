@@ -5,6 +5,7 @@ import { GitProcess } from 'dugite'
 import { decrypt, encrypt } from './crypto.js'
 
 import { userBlock, deviceBlock, ipBlock } from './blocked.js'
+import { pinyinName } from './common.js'
 
 const { ISSUE_NUMBER, ISSUE_BODY } = process.env
 
@@ -51,9 +52,11 @@ if (deviceBlock.includes(deviceId)) {
 await gitExec(['branch', branchName])
 await gitExec(['checkout', branchName])
 
-const subject = 'review'
+const subject = `${twelveFirst.map(pinyinName).join(', ')} | ${twelveSecond.map(pinyinName).join(', ')}`
 
 const text = `
+提交时间 ${new Date(timestamp).toLocaleString('zh-CN')}
+
 
 ${title} <https://www.bilibili.com/video/${id}>
 ${channel}
