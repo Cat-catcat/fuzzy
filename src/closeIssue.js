@@ -5,7 +5,7 @@ const log = w => {
   return w
 }
 
-fetch(log(`https://api.github.com/repos/dd-center/vdb/issues/${ISSUE_NUMBER}`), {
+fetch(log(`https://api.github.com/repos/Cat-catcat/fuzzy/issues/${ISSUE_NUMBER}`), {
   method: 'PATCH',
   headers: {
     'Content-Type': 'application/json',
